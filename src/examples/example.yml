@@ -3,7 +3,7 @@ description: >
 usage:
   version: 2.1
   orbs:
-    github-app-token: rossywhite/github-app-token@0.0.8
+    github-app-token: rossywhite/github-app-token@0.0.9
   executors:
     default:
       docker:
