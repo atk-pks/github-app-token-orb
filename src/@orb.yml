@@ -1,0 +1,9 @@
+version: 2.1
+
+description: >
+  Generate Temporary GitHub App Token with GitHub App.
+  For detail, see https://docs.github.com/en/developers/apps/building-github-apps/authenticating-with-github-apps.
+
+display:
+  home_url: "https://github.com/RossyWhite/github-app-token-orb"
+  source_url: "https://github.com/RossyWhite/github-app-token-orb"

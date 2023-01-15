@@ -1,0 +1,21 @@
+description: >
+  This command generate Temporary GitHub App Token with Runner's GitHub App Installation.
+parameters:
+  app_id:
+    type: string
+    description: "GitHub App ID."
+  app_private_key:
+    type: string
+    description: "GitHub App Private Key."
+  duration_seconds:
+    type: string
+    default: 300
+    description: "Duration of jwt in seconds."
+steps:
+  - run:
+      environment:
+        APP_ID: <<parameters.app_id>>
+        APP_PRIVATE_KEY: <<parameters.app_private_key>>
+        DURATION_SECONDS: <<parameters.duration_seconds>>
+      name: Generate Github App Token
+      command: <<include(scripts/get-access-token.sh)>>
