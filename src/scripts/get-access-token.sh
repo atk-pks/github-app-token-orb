@@ -8,7 +8,7 @@ b64enc() { openssl enc -base64 -A | tr '+/' '-_' | tr -d '='; }
 
 app_id=${!APP_ID_ENV:-}
 app_private_key=${!APP_PRIVATE_KEY_ENV:-}
-duration_seconds=${DURATION_SECONDS-1800}
+duration_seconds=${DURATION_SECONDS-600}
 
 # issued at time, 60 seconds in the past to allow for clock drift
 iat=$(($(date +%s) - 60))
@@ -16,7 +16,7 @@ exp="$((iat + duration_seconds))"
 
 # create the JWT
 signed_content="$(echo -n '{"alg":"RS256","typ":"JWT"}' | b64enc).$(echo -n "{\"iat\":${iat},\"exp\":${exp},\"iss\":${app_id}}" | b64enc)"
-sig=$(echo -n "$signed_content" | openssl dgst -binary -sha256 -sign "$app_private_key" | b64enc)
+sig=$(echo -n "$signed_content" | openssl dgst -binary -sha256 -sign <(printf '%s\n' "$app_private_key") | b64enc)
 jwt=$(printf '%s.%s\n' "${signed_content}" "${sig}")
 
 
