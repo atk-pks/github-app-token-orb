@@ -6,12 +6,9 @@ set -euo pipefail
 
 b64enc() { openssl enc -base64 -A | tr '+/' '-_' | tr -d '='; }
 
-# shellcheck disable=SC2296
-app_id="${<< parameters.app_id_env >>}"
-# shellcheck disable=SC2296
-app_private_key="${<< parameters.app_private_key_env >>}"
-# shellcheck disable=SC2296
-duration_seconds="${<< parameters.duration_seconds >>}"
+app_id=${!APP_ID_ENV:-}
+app_private_key=${!APP_PRIVATE_KEY_ENV:-}
+duration_seconds=${DURATION_SECONDS-1800}
 
 # issued at time, 60 seconds in the past to allow for clock drift
 iat=$(($(date +%s) - 60))

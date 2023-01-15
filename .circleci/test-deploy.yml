@@ -16,6 +16,9 @@ jobs:
     steps:
       - checkout
       # Run your orb's commands to validate them.
+#      - github-app-token/setup:
+#          app_id_env: APP_ID
+#          app_private_key_env: APP_PRIVATE_KEY
 workflows:
   test-deploy:
     jobs:
