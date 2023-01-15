@@ -3,7 +3,7 @@ description: >
 usage:
   version: 2.1
   orbs:
-    github-app-token: rossywhite/github-app-token@0.0.5
+    github-app-token: rossywhite/github-app-token@0.0.6
   executors:
     default:
       docker:
@@ -15,7 +15,7 @@ usage:
         - checkout
         - github-app-token/setup:
             app_id_env: APP_ID
-            app_private_key_env: APP_PRIVATE_KEY
+            b64_app_private_key_env: B64_APP_PRIVATE_KEY
   workflows:
     use-my-orb:
       jobs:

@@ -4,9 +4,9 @@ parameters:
   app_id_env:
     type: env_var_name
     description: "GitHub App ID."
-  app_private_key_env:
+  b64_app_private_key_env:
     type: env_var_name
-    description: "GitHub App Private Key."
+    description: "Base64 encoded GitHub App Private Key."
   duration_seconds:
     type: integer
     default: 600
@@ -15,7 +15,7 @@ steps:
   - run:
       environment:
         APP_ID_ENV: << parameters.app_id_env >>
-        APP_PRIVATE_KEY_ENV: << parameters.app_private_key_env >>
+        B64_APP_PRIVATE_KEY_ENV: << parameters.b64_app_private_key_env >>
         DURATION_SECONDS: << parameters.duration_seconds >>
       name: Generate Github App Token
       command: <<include(scripts/get-access-token.sh)>>
