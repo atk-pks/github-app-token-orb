@@ -12,7 +12,7 @@ exp="$((iat + duration_seconds))"
 
 # create the JWT
 signed_content="$(echo -n '{"alg":"RS256","typ":"JWT"}' | base64).$(echo -n "{\"iat\":${iat},\"exp\":${exp},\"iss\":${app_id}}" | base64)"
-sig=$(echo -n "$signed_content" | openssl dgst -binary -sha256 -sign <(echo "${b64_app_private_key}" | base64 -D) | base64)
+sig=$(echo -n "$signed_content" | openssl dgst -binary -sha256 -sign <(echo "${b64_app_private_key}" | base64 -d) | base64)
 jwt=$(printf '%s.%s\n' "${signed_content}" "${sig}")
 
 # get the access token
