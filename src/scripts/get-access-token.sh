@@ -21,16 +21,32 @@ jwt=$(printf '%s.%s\n' "${signed_content}" "${sig}")
 org="${CIRCLE_PROJECT_USERNAME}"
 repo="${CIRCLE_PROJECT_REPONAME}"
 
-installation_id=$(curl -s \
+echo "Getting access token for ${org}/${repo}..."
+
+res=$(curl -s \
 	-H "Accept: application/vnd.github+json" \
 	-H "Authorization: Bearer ${jwt}" \
 	-H "X-GitHub-Api-Version: 2022-11-28" \
-	https://api.github.com/repos/"${org}"/"${repo}"/installation | jq -r '.id')
+	https://api.github.com/repos/"${org}"/"${repo}"/installation)
 
-access_token=$(curl -s -X POST \
+installation_id=$(echo "${res}" | jq -rM '.id')
+if [[ $installation_id == "null" ]]; then
+  echo "Error: installation_id is empty."
+  echo "${res}"
+  exit 1
+fi
+
+res=$(curl -s -X POST \
 	-H "Authorization: Bearer $jwt" \
 	-H "Accept: application/vnd.github+json" \
 	-H "X-GitHub-Api-Version: 2022-11-28" \
-	https://api.github.com/app/installations/"${installation_id}"/access_tokens | jq -r '.token')
+	https://api.github.com/app/installations/"${installation_id}"/access_tokens)
+
+access_token=$(echo "${res}" | jq -rM '.token')
+if [[ $access_token == "null" ]]; then
+  echo "Error: access_token is empty"
+  echo "${res}"
+  exit 1
+fi
 
 echo "export GITHUB_TOKEN=${access_token}" >> "$BASH_ENV"
