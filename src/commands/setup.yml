@@ -13,5 +13,9 @@ parameters:
     description: "Duration of jwt in seconds."
 steps:
   - run:
+      environment:
+        APP_ID_ENV: << parameters.app_id_env >>
+        APP_PRIVATE_KEY_ENV: << parameters.app_private_key_env >>
+        DURATION_SECONDS: << parameters.duration_seconds >>
       name: Generate Github App Token
       command: <<include(scripts/get-access-token.sh)>>
