@@ -9,8 +9,8 @@ parameters:
     description: "GitHub App Private Key."
   duration_seconds:
     type: integer
-    default: 1800
-    description: "Duration of jwt in seconds."
+    default: 600
+    description: "Duration of jwt in seconds.(max: 600)"
 steps:
   - run:
       environment:
