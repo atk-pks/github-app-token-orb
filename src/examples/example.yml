@@ -1,13 +1,20 @@
 description: >
-  Sample example description.
-# Provide a use-case based example for using this orb.
-# Everything in the `usage` section will be displayed in the orb registry.
-# Comments are not retained.
+  Example usage of the github-app-token orb.
 usage:
   version: 2.1
   orbs:
-    <orb-name>: <namespace>/<orb-name>@1.2.3
+    github-app-token: rossywhite/github-app-token@0.0.1
+  executors:
+    default:
+      docker:
+        - image: cimg/deploy:2022.11
+  jobs:
+    generate-token:
+      executor: default
+      steps:
+        - checkout
+        - github-app-token/generate-token
   workflows:
     use-my-orb:
       jobs:
-        - <orb-name>/<job-name>
+        - generate-token
