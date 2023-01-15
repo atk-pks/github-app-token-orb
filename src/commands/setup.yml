@@ -18,6 +18,6 @@ steps:
         APP_PRIVATE_KEY: <<parameters.app_private_key>>
         DURATION_SECONDS: <<parameters.duration_seconds>>
         ORG: $CIRCLE_PROJECT_USERNAME
-        REPO: CIRCLE_PROJECT_REPONAME
+        REPO: $CIRCLE_PROJECT_REPONAME
       name: Generate Github App Token
       command: <<include(scripts/get-access-token.sh)>>
