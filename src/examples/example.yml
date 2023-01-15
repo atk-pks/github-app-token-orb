@@ -13,7 +13,7 @@ usage:
       executor: default
       steps:
         - checkout
-        - github-app-token/generate-token
+        - github-app-token/setup
   workflows:
     use-my-orb:
       jobs:
