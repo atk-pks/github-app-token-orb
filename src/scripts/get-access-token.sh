@@ -32,4 +32,4 @@ access_token=$(curl -s -X POST \
 	-H "X-GitHub-Api-Version: 2022-11-28" \
 	https://api.github.com/app/installations/"${installation_id}"/access_tokens | jq -r '.token')
 
-echo "${access_token}"
+echo "export GITHUB_TOKEN=${access_token}" >> "$BASH_ENV"
