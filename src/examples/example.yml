@@ -16,6 +16,7 @@ usage:
         - github-app-token/setup:
             app_id_env: APP_ID
             b64_app_private_key_env: B64_APP_PRIVATE_KEY
+            installation_id_env: INSTALLATION_ID
   workflows:
     use-my-orb:
       jobs:
