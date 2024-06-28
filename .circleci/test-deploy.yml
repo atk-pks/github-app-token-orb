@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  github-app-token: rossywhite/github-app-token@dev:<<pipeline.git.revision>>
+  github-app-token: atk-pks/github-app-token@dev:<<pipeline.git.revision>>
   orb-tools: circleci/orb-tools@11.5
 
 filters: &filters
@@ -32,7 +32,7 @@ workflows:
       - orb-tools/pack:
           filters: *filters
       - orb-tools/publish:
-          orb-name: rossywhite/github-app-token
+          orb-name: atk-pks/github-app-token
           vcs-type: << pipeline.project.type >>
           pub-type: production
           requires:
